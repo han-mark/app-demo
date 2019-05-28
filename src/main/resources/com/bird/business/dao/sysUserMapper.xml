@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bird.business.dao.SysUserDao">
+    <!-- 按照用户名和密码查找 -->
+    <select id="findSysUserById" resultType="com.bird.business.domain.SysUser" parameterType="String">
+        select 
+            t.uuid as id,
+              t.uname as username,
+              t.uname as trueName,
+              '0' as deleteFlag
+        from user_test t where t.uname = #{username}
+    </select>
+    
+</mapper>
