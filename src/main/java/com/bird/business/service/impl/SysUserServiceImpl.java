@@ -18,5 +18,4 @@ public class SysUserServiceImpl implements ISysUserService {
     public SysUser getSysUserById(String username) {
         return this.sysUserDao.findSysUserById(username);
     }
-
 }
