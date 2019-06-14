@@ -1,35 +1,53 @@
 package com.bird.business.domain;
 
-public class SysUser {
-    
-    private String id;
-    private String username;
-    private String trueName;
-	private String deleteFlag;
-	
-	public String getId() {
-		return id;
+import java.io.Serializable;
+
+public class SysUser implements Serializable {
+
+    private String uuid;
+    private String uname;
+    private String sex;
+	private String age;
+
+	public String getUuid() {
+		return uuid;
 	}
-	public void setId(String id) {
-		this.id = id;
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
-	public String getUsername() {
-		return username;
+
+	public String getUname() {
+		return uname;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+
+	public void setUname(String uname) {
+		this.uname = uname;
 	}
-	public String getTrueName() {
-		return trueName;
+
+	public String getSex() {
+		return sex;
 	}
-	public void setTrueName(String trueName) {
-		this.trueName = trueName;
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
-	public String getDeleteFlag() {
-		return deleteFlag;
+
+	public String getAge() {
+		return age;
 	}
-	public void setDeleteFlag(String deleteFlag) {
-		this.deleteFlag = deleteFlag;
+
+	public void setAge(String age) {
+		this.age = age;
 	}
-    
+
+	@Override
+	public String toString() {
+		return "SysUser{" +
+				"uuid='" + uuid + '\'' +
+				", uname='" + uname + '\'' +
+				", sex='" + sex + '\'' +
+				", age='" + age + '\'' +
+				'}';
+	}
 }

@@ -44,7 +44,7 @@
             那么会以该配置文件的内容作为配置信息构建对应的SqlSessionFactoryBuilder，
             但是后续属性指定的内容会覆盖该配置文件里面指定的对应内容
         -->
-        <!-- <property name="configLocation" value="classpath:mybatis-config.xml"/> -->
+         <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <!--
             扫描entity包,使用别名,多个用;隔开
             一般对应实体类所在的包，这个时候会自动取对应包中不包括包名的简单类名作为包括包名的别名。
