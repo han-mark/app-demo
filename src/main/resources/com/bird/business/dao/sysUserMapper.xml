@@ -14,7 +14,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 end sex,age
             from (select t.*, rownum rn
             from user_test t
-            where flag = 1 and rownum <![CDATA[<=]]> to_number(#{page})*to_number(#{limit}))
+            where flag = 1
+             <if test="uname != null and uname != ''">
+                and uname like '%' || #{uname} || '%'
+             </if>
+            <if test="sex != null and sex != ''">
+                and sex = #{sex}
+            </if>
+             and rownum <![CDATA[<=]]> to_number(#{page})*to_number(#{limit}))
         where rn > (to_number(#{page})-1)*to_number(#{limit})
     </select>
 

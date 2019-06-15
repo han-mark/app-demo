@@ -22,9 +22,26 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <!-- 新增按钮 -->
-<button id="add" type="button" class="layui-btn" style="margin-top: 10px">
+<button id="add" type="button" class="layui-btn layui-inline" style="margin-top: 10px">
     <i class="layui-icon">&#xe608;</i> 添加
 </button>
+<div class="layui-form-item layui-input-inline">
+    <label class="layui-form-label" style="margin-top: 17px">姓名：</label>
+    <div class="layui-input-inline"  style="margin-top: 15px">
+        <input type="text" name="searchname" id="searchname" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+    </div>
+</div>
+<div class="layui-form-item layui-input-inline">
+    <label class="layui-form-label"  style="margin-top: 17px">性别：</label>
+    <div class="layui-input-inline"  style="margin-top: 15px">
+        <select name="searchsex" id="searchsex" lay-verify="required" style="height: 38px;line-height: 1.3;border-width: 1px;border-style: solid;background-color: #fff;border-radius: 2px;width: 90px;">
+            <option value=""></option>
+            <option value="1">男</option>
+            <option value="2">女</option>
+        </select>
+    </div>
+</div>
+<button class="layui-btn" data-type="reload" id="search-button" style="margin-top: 12px">搜索</button>
 <!-- 表格 -->
 <table id="demo" lay-filter="test"></table>
 
@@ -143,6 +160,7 @@ layui.use(['table','jquery','form'], function(){
         }
     });
 
+    //新增按钮点击事件
     $("#add").bind("click",function(){
         //弹出层处理
         layer.open({
@@ -154,6 +172,20 @@ layui.use(['table','jquery','form'], function(){
             content:$("#PageContext").val() + '/pages/updateuser.jsp',
             end:function(){
                 table.reload('test'); //对应table.render中定义的id
+            }
+        });
+    });
+
+    //搜索功能
+    $('#search-button').on('click', function(){
+        //执行重载
+        table.reload('test', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+            ,where: {
+                'uname': $('#searchname').val(),
+                'sex':$('#searchsex option:selected').val()
             }
         });
     });
