@@ -48,6 +48,7 @@
     <!-- mapping对应URL网站地址，location对应文件在服务器的文件路径 -->
     <mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
     <mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
+    <mvc:resources location="/images/" mapping="/images/**"></mvc:resources>
     <mvc:resources location="/layui/" mapping="/layui/**"></mvc:resources>
 
 

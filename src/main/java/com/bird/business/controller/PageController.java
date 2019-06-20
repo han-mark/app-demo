@@ -10,6 +10,6 @@ public class PageController {
 
     @RequestMapping("/index")
     public String toIndex(HttpServletRequest request, Model model){
-        return "user";
+        return "login";
     } 
 }

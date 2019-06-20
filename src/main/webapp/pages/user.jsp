@@ -22,7 +22,7 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <!-- 新增按钮 -->
-<button id="add" type="button" class="layui-btn layui-inline" style="margin-top: 10px">
+<button id="add" type="button" class="layui-btn layui-inline" style="margin-top: -6px">
     <i class="layui-icon">&#xe608;</i> 添加
 </button>
 <div class="layui-form-item layui-input-inline">
@@ -41,7 +41,7 @@
         </select>
     </div>
 </div>
-<button class="layui-btn" data-type="reload" id="search-button" style="margin-top: 12px">搜索</button>
+<button class="layui-btn" data-type="reload" id="search-button" style="margin-top: -3px">搜索</button>
 <!-- 表格 -->
 <table id="demo" lay-filter="test"></table>
 
@@ -56,7 +56,7 @@ layui.use(['table','jquery','form'], function(){
     table.render({
         elem: '#demo' //对应表格元素
         ,id: 'test'
-        ,height: 470
+        // ,height: 470
         ,url: $("#PageContext").val() + '/user/findAll' //数据接口,默认会带？page=1,limit=10,返回的数据有格式要求
         ,method: 'post'
         ,even: true //开启隔行背景
@@ -66,7 +66,7 @@ layui.use(['table','jquery','form'], function(){
             ,{field: 'uname', title: '用户名', width:300}
             ,{field: 'sex', title: '性别', width:300, sort: true}
             ,{field: 'age', title: '年龄', width:300}
-            ,{fixed: 'right', title: '操作', width:300, align:'center', toolbar: '#barDemo'} //这里的toolbar绑定工具条
+            ,{fixed: 'right', title: '操作', width:200, align:'center', toolbar: '#barDemo'} //这里的toolbar绑定工具条
         ]]
     });
 
