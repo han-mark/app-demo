@@ -21,27 +21,31 @@
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
-<!-- 新增按钮 -->
-<button id="add" type="button" class="layui-btn layui-inline" style="margin-top: -6px">
-    <i class="layui-icon">&#xe608;</i> 添加
-</button>
-<div class="layui-form-item layui-input-inline">
-    <label class="layui-form-label" style="margin-top: 17px">姓名：</label>
-    <div class="layui-input-inline"  style="margin-top: 15px">
-        <input type="text" name="searchname" id="searchname" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+<div class="top_tool">
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label" style="">姓名：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="searchname" id="searchname" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+        </div>
     </div>
-</div>
-<div class="layui-form-item layui-input-inline">
-    <label class="layui-form-label"  style="margin-top: 17px">性别：</label>
-    <div class="layui-input-inline"  style="margin-top: 15px">
-        <select name="searchsex" id="searchsex" lay-verify="required" style="height: 38px;line-height: 1.3;border-width: 1px;border-style: solid;background-color: #fff;border-radius: 2px;width: 90px;">
-            <option value=""></option>
-            <option value="1">男</option>
-            <option value="2">女</option>
-        </select>
+    <div class="layui-form-item layui-input-inline">
+        <label class="layui-form-label">性别：</label>
+        <div class="layui-input-inline">
+            <select name="searchsex" id="searchsex" lay-verify="required" class="sex_select">
+                <option value=""></option>
+                <option value="1">男</option>
+                <option value="2">女</option>
+            </select>
+        </div>
     </div>
+    <button class="layui-btn btn_extend" data-type="reload" id="search-button">
+        <i class="layui-icon">&#xe615;</i> 搜索
+    </button>
+    <!-- 新增按钮 -->
+    <button class="layui-btn btn_extend" type="button" id="add">
+        <i class="layui-icon">&#xe608;</i> 添加
+    </button>
 </div>
-<button class="layui-btn" data-type="reload" id="search-button" style="margin-top: -3px">搜索</button>
 <!-- 表格 -->
 <table id="demo" lay-filter="test"></table>
 
@@ -56,7 +60,7 @@ layui.use(['table','jquery','form'], function(){
     table.render({
         elem: '#demo' //对应表格元素
         ,id: 'test'
-        // ,height: 470
+        ,height: 558
         ,url: $("#PageContext").val() + '/user/findAll' //数据接口,默认会带？page=1,limit=10,返回的数据有格式要求
         ,method: 'post'
         ,even: true //开启隔行背景
@@ -68,6 +72,23 @@ layui.use(['table','jquery','form'], function(){
             ,{field: 'age', title: '年龄', width:300}
             ,{fixed: 'right', title: '操作', width:200, align:'center', toolbar: '#barDemo'} //这里的toolbar绑定工具条
         ]]
+    });
+
+    //监听行双击事件
+    table.on('rowDouble(test)', function(obj){
+        //obj 同上
+        //弹出层处理
+        layer.open({
+            type:2, //2表示frame
+            title:'用户信息',
+            area:['500px','50%'],
+            shadeClose:false,
+            closeBtn:1,
+            content:$("#PageContext").val() + '/pages/updateuser.jsp?uuid='+obj.data.uuid + '&flag=1', //flag有值为查看详情页
+            end:function(){
+                // table.reload('test'); //对应table.render中定义的id
+            }
+        });
     });
 
     //监听工具条
@@ -87,35 +108,6 @@ layui.use(['table','jquery','form'], function(){
                 content:$("#PageContext").val() + '/pages/updateuser.jsp?uuid='+data.uuid + '&flag=1', //flag有值为查看详情页
                 end:function(){
                     // table.reload('test'); //对应table.render中定义的id
-                }
-            });
-
-            $.ajax({
-                type : 'POST',
-                url : $("#PageContext").val() + '/user/getUserByUuid',
-                dataType : 'json',
-                data : {
-                    'uuid' : data.uuid
-                },
-                success : function(e){
-                    //e为后台返回的数据
-                    $("#uname").attr("disabled","disabled");
-                    $("#age").attr("disabled","disabled");
-                    $("input[name='sex']").attr("disabled",true);
-                    $("input[name='sex']").attr("disabled","disabled");
-                    $("#uuid").val(e.uuid);
-                    $("#uname").val(e.uname);
-                    $("#age").val(e.age);
-                    var selects = document.getElementsByName("sex");
-                    for (var i=0; i<selects.length; i++){
-                        if (selects[i].value == e.sex) {
-                            selects[i].checked= true;
-                            break;
-                        }
-                    }
-                },
-                error : function(){
-                    layer.msg("服务器开小差了，请稍后再试...");
                 }
             });
         } else if(layEvent === 'del'){ //删除
