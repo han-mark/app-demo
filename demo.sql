@@ -42,4 +42,4 @@ insert into User_Test (UUID, UNAME, SEX, AGE, FLAG, CREATE_TIME)
 values ('d6f0114d-4ced-4e0d-999e-673047c97e88', '杨小历', '1', '33', '1', to_date('14-06-2019 22:27:06', 'dd-mm-yyyy hh24:mi:ss'));
 insert into User_Test (UUID, UNAME, SEX, AGE, FLAG, CREATE_TIME)
 values ('ebb14f47-c587-4a3d-b7dc-88d2c9507360', '转转', '2', '23', '1', to_date('15-06-2019 01:14:26', 'dd-mm-yyyy hh24:mi:ss'));
-commit;
+commit; 
