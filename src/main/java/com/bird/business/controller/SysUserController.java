@@ -3,6 +3,8 @@ package com.bird.business.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.bird.business.domain.SysUser;
@@ -34,15 +36,18 @@ public class SysUserController {
         //获取分页参数
         String page = request.getParameter("page");
         String limit = request.getParameter("limit");
-        paramMap.put("page",page);
-        paramMap.put("limit",limit);
 
+        //设置分页
+        PageHelper.startPage(Integer.parseInt(page), Integer.parseInt(limit));
+        //获取分页数据
         List<SysUser> users = this.iSysUserService.getUserList(paramMap);
-        String count = iSysUserService.getUserListForCount(paramMap);
+
+        PageInfo<SysUser> pageInfo=new PageInfo<SysUser>(users);
+
         Map<String,Object> resultMap = new HashMap<String,Object>();
         resultMap.put("code",0);
         resultMap.put("msg","");
-        resultMap.put("count",Integer.parseInt(count));
+        resultMap.put("count",pageInfo.getTotal());
         resultMap.put("data",users);
         return resultMap;
     }
@@ -87,9 +92,11 @@ public class SysUserController {
             String uuid = (String)paramMap.get("uuid");
             if (uuid == null || uuid == ""){
                 uuid = UUID.randomUUID().toString();
+                paramMap.put("uuid",uuid);
+                iSysUserService.addUser(paramMap);
+            } else {
+                iSysUserService.updateUser(paramMap);
             }
-            paramMap.put("uuid",uuid);
-            iSysUserService.addOrUpdateUser(paramMap);
             flag = "1";
         }catch (Exception e) {
             e.printStackTrace();

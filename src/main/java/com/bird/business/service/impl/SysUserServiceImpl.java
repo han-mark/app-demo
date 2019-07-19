@@ -23,11 +23,6 @@ public class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
-    public String getUserListForCount(Map<String,Object> paramMap){
-        return sysUserDao.getUserListForCount(paramMap);
-    }
-
-    @Override
     public void deleteUserByUuid(Map<String,Object> paramMap){
         sysUserDao.deleteUserByUuid(paramMap);
     }
@@ -38,7 +33,12 @@ public class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
-    public void addOrUpdateUser(Map<String,Object> paramMap){
-        sysUserDao.addOrUpdateUser(paramMap);
+    public void addUser(Map<String, Object> paramMap) {
+        sysUserDao.addUser(paramMap);
+    }
+
+    @Override
+    public void updateUser(Map<String, Object> paramMap) {
+        sysUserDao.updateUser(paramMap);
     }
 }

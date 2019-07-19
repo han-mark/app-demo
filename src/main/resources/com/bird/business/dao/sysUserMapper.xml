@@ -6,29 +6,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!-- 查找用户列表 -->
     <select id="getUserList" resultType="com.bird.business.domain.SysUser" parameterType="java.util.Map">
         select uuid,uname,
-                case sex
-                 when '1' then
-                  '男'
-                 else
-                  '女'
-                end sex,age
-            from (select t.*, rownum rn
+            case sex
+            when '1' then
+            '男'
+            else
+            '女'
+            end sex,age
             from user_test t
-            where flag = 1
-             <if test="uname != null and uname != ''">
-                and uname like '%' || #{uname} || '%'
-             </if>
-            <if test="sex != null and sex != ''">
-                and sex = #{sex}
-            </if>
-             and rownum <![CDATA[<=]]> to_number(#{page})*to_number(#{limit}))
-        where rn > (to_number(#{page})-1)*to_number(#{limit})
-    </select>
-
-    <!-- 用户总数 -->
-    <select id="getUserListForCount" resultType="java.lang.String" parameterType="java.util.Map">
-        select count(1) count
-            from user_test where flag = 1
+        where flag = 1
+        <if test="uname != null and uname != ''">
+            and uname like CONCAT('%', #{uname}, '%')
+        </if>
+        <if test="sex != null and sex != ''">
+            and sex = #{sex}
+        </if>
     </select>
 
     <!-- 删除用户 -->
@@ -46,20 +37,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 end sex,age from user_test where uuid = #{uuid}
     </select>
 
+    <!-- 新增用户 -->
+    <update id="addUser" parameterType="java.util.Map">
+        INSERT INTO `user_test` (
+          `UUID`,
+          `UNAME`,
+          `SEX`,
+          `AGE`,
+          `FLAG`,
+          `CREATE_TIME`
+        )
+        VALUES
+          (
+            #{uuid},
+            #{uname},
+            #{sex},
+            #{age},
+            '1',
+            NOW()
+          )
+    </update>
+
     <!-- 新增/修改用户 -->
-    <update id="addOrUpdateUser" parameterType="java.util.Map">
-        merge into user_test a
-          using (select
-                    #{uuid} uuid,
-                    #{uname} uname,
-                    #{sex} sex,
-                    #{age} age,
-                    '1' flag
-                from dual) b
-        on (a.uuid = b.uuid)
-        when matched then
-          update set a.uname = b.uname, a.sex = b.sex, a.age = b.age
-        when not matched then
-          insert (uuid, uname, sex, age,flag) values (b.uuid, b.uname, b.sex, b.age, b.flag)
+    <update id="updateUser" parameterType="java.util.Map">
+        UPDATE
+          `user_test`
+        SET
+          `uname` = #{uname},
+          `sex` = #{sex},
+          `age` = #{age},
+          `create_time` = NOW()
+        WHERE `uuid` = #{uuid}
     </update>
 </mapper>

@@ -1,2 +1,2 @@
-# maven_app_demo
+# app_demo
 Spring+SpringMVC+Mybatis简单框架
