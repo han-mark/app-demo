@@ -1,8 +1,5 @@
 package com.bird.business;
 
-import com.bird.business.domain.TbAdmin;
-import com.bird.business.domain.TbAdminExample;
-import com.bird.business.service.ITbAdminService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.junit.Test;
@@ -19,7 +16,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration( locations = {"classpath:spring-mvc.xml","classpath:mybatis-config.xml","classpath:spring-mybatis.xml"})
 public class TbAdminTest {
-
+/*
     @Autowired
     private ITbAdminService tbAdminService;
 
@@ -87,4 +84,5 @@ public class TbAdminTest {
         PageInfo<TbAdmin> pageInfo=new PageInfo<TbAdmin>(tbAdmins);
         System.out.println(pageInfo);
     }
+    */
 }

@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.bird.business.domain.SysUser;
@@ -19,7 +21,6 @@ import java.util.Map;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/user")
 public class SysUserController {
     @Resource  
     private ISysUserService iSysUserService;
@@ -30,6 +31,7 @@ public class SysUserController {
      * @param request
      * @return
      */
+    @RequiresPermissions("stu:list")
     @RequestMapping(value = "/findAll",method= RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> getUserList(@RequestParam Map<String,Object> paramMap, HttpServletRequest request){
@@ -56,6 +58,7 @@ public class SysUserController {
      * 删除用户
      * @param paramMap
      */
+    @RequiresPermissions("stu:delete")
     @RequestMapping(value = "/deleteUserByUuid",method= RequestMethod.POST)
     @ResponseBody
     public String deleteUserByUuid(@RequestParam Map<String,Object> paramMap){
@@ -73,6 +76,7 @@ public class SysUserController {
      * 查找用户
      * @param paramMap
      */
+    @RequiresPermissions("stu:update")
     @RequestMapping(value = "/getUserByUuid",method= RequestMethod.POST)
     @ResponseBody
     public SysUser getUserByUuid(@RequestParam Map<String,Object> paramMap){
@@ -84,6 +88,7 @@ public class SysUserController {
      * 新增/修改用户
      * @param paramMap
      */
+    @RequiresPermissions(value = {"stu:add", "stu:update"}, logical = Logical.OR)
     @RequestMapping(value = "/addOrUpdateUser",method= RequestMethod.POST)
     @ResponseBody
     public String addOrUpdateUser(@RequestParam Map<String,Object> paramMap){

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <!--登录页url,没权限的请求跳转至登录页-->
+        <property name="loginUrl" value="login.jsp"/>
+        <!--未认证跳转页面-->
+        <!--<property name="unauthorizedUrl" value="403.html"/>-->
+        <!--过滤器链-->
+        <property name="filterChainDefinitions">
+            <value>
+                <!--静态资源免认证(页面除外)-->
+                /css/**=anon
+                /images/**=anon
+                /js/**=anon
+                /layui/**=anon
+                /layui-tree/**=anon
+                <!--登录页不需要任何认证-->
+                /login.jsp = anon
+                /login = anon
+                /loginOut = anon
+                <!--获取验证码不需要认证-->
+                /vcode = anon
+                /user/** = authc
+                /** = authc
+            </value>
+        </property>
+    </bean>
+
+    <!--创建SecurityManager-->
+    <bean class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" id="securityManager">
+        <!--注入realm-->
+        <property name="realm" ref="realm"/>
+        <!--注入cookieRememberManager-->
+        <property name="rememberMeManager" ref="cookieRememberMeManager" />
+    </bean>
+
+    <bean class="com.bird.business.realm.CustomRealm" id="realm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+    </bean>
+
+    <!--注入加密bean-->
+    <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher" id="credentialsMatcher">
+        <property name="hashAlgorithmName" value="md5"/>
+        <property name="hashIterations" value="1" />
+    </bean>
+
+    <!--加入cookie-->
+    <bean class="org.apache.shiro.web.mgt.CookieRememberMeManager" id="cookieRememberMeManager">
+        <property name="cookie" ref="cookie"/>
+    </bean>
+    <bean class="org.apache.shiro.web.servlet.SimpleCookie" id="cookie">
+        <!--cookie名称-->
+        <constructor-arg value="rememberMe" />
+        <!--cookie存活时间,单位s-->
+        <property name="maxAge" value="60000" />
+    </bean>
+</beans>

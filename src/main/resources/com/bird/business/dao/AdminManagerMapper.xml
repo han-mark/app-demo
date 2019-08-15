@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bird.business.dao.AdminManagerDao">
+    <!-- 查询用户角色 -->
+    <select id="getRolesByUsername" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT
+          r.`role_name`
+        FROM
+          `tb_roles` r
+          INNER JOIN `tb_user` u
+            ON u.`role_id` = r.`role_id`
+        WHERE u.`username` = #{userName}
+    </select>
+
+    <!-- 查询角色权限 -->
+    <select id="getPermsByRoles" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT
+          tm.`perms`
+        FROM
+          `tb_menus` tm
+          INNER JOIN `tb_roles_menus` trm
+            ON tm.`menu_id` = trm.`menu_id`
+          INNER JOIN `tb_user` tu
+            ON tu.`role_id` = trm.`role_id`
+        WHERE TRIM(tm.`perms`) <![CDATA[ <> ]]> '' AND TRIM(tm.`perms`) IS NOT NULL
+          AND tu.`username` = #{userName}
+    </select>
+
+    <!--查询用户菜单(左侧导航栏内容,过滤掉权限数据)-->
+    <select id="getMenusList" resultType="com.bird.business.domain.Menus" parameterType="java.lang.String">
+        SELECT
+          m.menu_id AS menuId,
+          m.title,
+          m.icon,
+          m.href,
+          m.perms,
+          m.spread,
+          m.parent_id AS parentId,
+          m.sorting
+        FROM
+          tb_roles_menus r
+          LEFT JOIN tb_menus m
+            ON r.menu_id = m.menu_id
+          LEFT JOIN tb_user u
+            ON u.`role_id` = r.`role_id`
+        WHERE u.`username` = #{userName} AND (m.`perms` IS NULL OR TRIM(m.`perms`) = '')
+        ORDER BY sorting DESC
+    </select>
+</mapper>

@@ -1,0 +1,23 @@
+body {
+    margin: 10px auto;
+}
+
+ul {
+    margin-top: 5px;
+}
+
+li {
+    margin-top: 3px;
+}
+
+.layui-form-switch {
+    margin-top: 0;
+}
+
+#tree1 ul + ul {
+    border-top: 1px dashed #e2e2e2;
+}
+
+#main {
+    margin: 10px 15px;
+}
