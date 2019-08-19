@@ -10,6 +10,10 @@
                            http://www.springframework.org/schema/util
                            http://www.springframework.org/schema/util/spring-util.xsd">
 
+    <!-- web.xml中context-param执行顺序在servlet之前,cache与utils需在redisCacheManager前加载 -->
+    <context:component-scan base-package="com.bird.business.cache" />
+    <context:component-scan base-package="com.bird.business.utils" />
+
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <!--登录页url,没权限的请求跳转至登录页-->
@@ -41,13 +45,27 @@
     <bean class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" id="securityManager">
         <!--注入realm-->
         <property name="realm" ref="realm"/>
+        <!--注入sessionManager-->
+        <property name="sessionManager" ref="redisSessionManager" />
+        <!--注入cacheManager-->
+        <property name="cacheManager" ref="redisCacheManager"/>
         <!--注入cookieRememberManager-->
         <property name="rememberMeManager" ref="cookieRememberMeManager" />
     </bean>
 
+    <!-- 自定义realm -->
     <bean class="com.bird.business.realm.CustomRealm" id="realm">
         <property name="credentialsMatcher" ref="credentialsMatcher"/>
     </bean>
+
+    <!--在自定义的SessionManager中引入自定义的sessionDAO-->
+    <bean class="com.bird.business.session.CustomSessionManager" id="redisSessionManager">
+        <property name="sessionDAO" ref="redisSessionDao"/>
+    </bean>
+    <bean class="com.bird.business.session.RedisSessionDao" id="redisSessionDao"/>
+
+    <!--增加角色/权限的缓存,自动缓存自定义realm中的认证信息(包含角色/权限),授权没必要缓存-->
+    <bean class="com.bird.business.cache.RedisCacheManager" id="redisCacheManager"/>
 
     <!--注入加密bean-->
     <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher" id="credentialsMatcher">
