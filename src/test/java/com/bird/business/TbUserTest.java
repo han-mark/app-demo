@@ -23,7 +23,7 @@ public class TbUserTest {
     @Test
     public void test(){
 
-        userController.login(null,"admin","admin","123");
+        userController.login(null,"admin","admin","123", "1");
     }
 
     @Test

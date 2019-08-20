@@ -42,7 +42,7 @@ public class IndexController {
      */
     @RequestMapping("/login")
     @ResponseBody
-    public ResultUtil login(HttpServletRequest req, String username, String password, String vcode) {
+    public ResultUtil login(HttpServletRequest req, String username, String password, String vcode, String rememberMe) {
         if(StringUtils.isEmpty(username)|| StringUtils.isEmpty(password)||StringUtils.isEmpty(vcode)){
             return ResultUtil.error("参数不能为空");
         }
@@ -52,6 +52,10 @@ public class IndexController {
         try{
             Subject subject = ShiroUtils.getSubject();
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+            //是否启动cookie
+            if (rememberMe != null){
+                token.setRememberMe(true);
+            }
             subject.login(token);
         }catch (UnknownAccountException e) {
             return ResultUtil.error(e.getMessage());
