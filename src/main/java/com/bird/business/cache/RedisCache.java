@@ -1,18 +1,20 @@
 package com.bird.business.cache;
 
-
 import com.bird.business.utils.JedisUtil;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.SerializationUtils;
-
 import java.util.Collection;
 import java.util.Set;
 
 @Component
 public class RedisCache<K, V> implements Cache<K, V> {
+
+    private  static  final Logger logger = LoggerFactory.getLogger(RedisCache.class);
 
     @Autowired
     private JedisUtil jedisUtil;
@@ -26,7 +28,7 @@ public class RedisCache<K, V> implements Cache<K, V> {
 
     @Override
     public V get(K k) throws CacheException {
-        System.out.println("从RedisCache中获取授权信息");
+        logger.info("从RedisCache中获取授权信息");
         byte[] value = jedisUtil.get(getKey(k));
         if (value != null) {
             return (V) SerializationUtils.deserialize(value);

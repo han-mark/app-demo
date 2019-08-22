@@ -3,6 +3,7 @@ package com.bird.business.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.bird.business.annotation.SysLog;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.authz.annotation.Logical;
@@ -22,15 +23,16 @@ import java.util.UUID;
 
 @Controller
 public class SysUserController {
-    @Resource  
+    @Resource
     private ISysUserService iSysUserService;
 
     /**
-     * 查询用户列表
+     * 查询学生列表
      * @param paramMap
      * @param request
      * @return
      */
+    @SysLog(value = "查看学生列表")
     @RequiresPermissions("stu:list")
     @RequestMapping(value = "/findAll",method= RequestMethod.POST)
     @ResponseBody
@@ -55,9 +57,10 @@ public class SysUserController {
     }
 
     /**
-     * 删除用户
+     * 删除学生
      * @param paramMap
      */
+    @SysLog(value = "删除学生")
     @RequiresPermissions("stu:delete")
     @RequestMapping(value = "/deleteUserByUuid",method= RequestMethod.POST)
     @ResponseBody
@@ -76,6 +79,7 @@ public class SysUserController {
      * 查找用户
      * @param paramMap
      */
+    @SysLog(value = "查看学生")
     @RequiresPermissions("stu:update")
     @RequestMapping(value = "/getUserByUuid",method= RequestMethod.POST)
     @ResponseBody
@@ -88,6 +92,7 @@ public class SysUserController {
      * 新增/修改用户
      * @param paramMap
      */
+    @SysLog(value = "新增/修改学生")
     @RequiresPermissions(value = {"stu:add", "stu:update"}, logical = Logical.OR)
     @RequestMapping(value = "/addOrUpdateUser",method= RequestMethod.POST)
     @ResponseBody

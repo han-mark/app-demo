@@ -9,17 +9,17 @@
   <url>http://maven.apache.org</url>
   
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <maven.compiler.source>1.7</maven.compiler.source>
+      <maven.compiler.target>1.7</maven.compiler.target>
     
-    <!-- spring版本号 -->
-    <spring.version>4.0.2.RELEASE</spring.version>
-    <!-- mybatis版本号 -->
-    <mybatis.version>3.2.6</mybatis.version>
-    <!-- log4j日志文件管理包版本 -->
-    <slf4j.version>1.7.7</slf4j.version>
-    <log4j.version>1.2.17</log4j.version>
+      <!-- spring版本号 -->
+      <spring.version>4.0.2.RELEASE</spring.version>
+      <!-- mybatis版本号 -->
+      <mybatis.version>3.2.6</mybatis.version>
+      <!-- log4j日志文件管理包版本 -->
+      <slf4j.version>1.7.7</slf4j.version>
+      <log4j.version>1.2.17</log4j.version>
       <kaptcha.version>2.3.2</kaptcha.version>
   </properties>
   
@@ -262,6 +262,30 @@
           <groupId>redis.clients</groupId>
           <artifactId>jedis</artifactId>
           <version>2.9.0</version>
+      </dependency>
+
+      <!-- 常用工具类 -->
+      <dependency>
+          <groupId>commons-lang</groupId>
+          <artifactId>commons-lang</artifactId>
+          <version>2.6</version>
+      </dependency>
+
+      <!-- jackson -->
+      <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-core</artifactId>
+          <version>2.7.4</version>
+      </dependency>
+      <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>2.7.4</version>
+      </dependency>
+      <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-annotations</artifactId>
+          <version>2.7.4</version>
       </dependency>
   </dependencies>
   

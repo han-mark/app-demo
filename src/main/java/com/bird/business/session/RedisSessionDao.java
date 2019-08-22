@@ -4,6 +4,8 @@ import com.bird.business.utils.JedisUtil;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.SerializationUtils;
@@ -21,6 +23,8 @@ import java.util.Set;
  * <单机系统无所谓>
  */
 public class RedisSessionDao extends AbstractSessionDAO {
+
+    private  static  final Logger logger = LoggerFactory.getLogger(RedisSessionDao.class);
 
     @Autowired
     private JedisUtil jedisUtil;
@@ -52,7 +56,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
 
     @Override
     protected Session doReadSession(Serializable sessionId) {
-        System.out.println("read session");
+        logger.info("从RedisCache中获取session信息");
         if (sessionId == null) {
             return null;
         }

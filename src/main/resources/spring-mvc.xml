@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"  
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:aop="http://www.springframework.org/schema/aop"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -13,14 +14,28 @@
                         http://www.springframework.org/schema/mvc
                         http://www.springframework.org/schema/mvc/spring-mvc.xsd
                         http://www.springframework.org/schema/aop
-                        http://www.springframework.org/schema/aop/spring-aop.xsd">
+                        http://www.springframework.org/schema/aop/spring-aop.xsd
+                        http://www.springframework.org/schema/task
+                        http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
-    <!-- 过滤静态资源需加该配置 -->
+    <!-- 配置标签使springmvc注解生效 -->
     <mvc:annotation-driven />
+
+    <!-- 启动定时任务注解 -->
+    <task:annotation-driven/>
+
+    <!-- 启动对@AspectJ注解的支持 -->
+    <!-- proxy-target-class等于true是强制使用cglib代理，proxy-target-class默认是false，如果你的类实现了接口 就走JDK代理，如果没有，走cglib代理  -->
+    <!-- 注：对于单利模式建议使用cglib代理，虽然JDK动态代理比cglib代理速度快，但性能不如cglib -->
+    <!--如果不写proxy-target-class="true"这句话也没问题-->
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+
     <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->  
     <context:component-scan base-package="com.bird.business.controller" />  
     <context:component-scan base-package="com.bird.business.service" />
     <context:component-scan base-package="com.bird.business.dao" />
+    <context:component-scan base-package="com.bird.business.annotation" />
+    <context:component-scan base-package="com.bird.business.quartz" />
 
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
     <bean id="mappingJacksonHttpMessageConverter"  
@@ -71,8 +86,7 @@
         <property name="maxInMemorySize" value="40960" />    
     </bean>
 
-
-    <!--注解授权-->
+    <!--shiro注解授权-->
     <aop:config proxy-target-class="true" />
     <bean class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor" id="authorizationAttributeSourceAdvisor">

@@ -1,5 +1,6 @@
 package com.bird.business.controller;
 
+import com.bird.business.annotation.SysLog;
 import com.bird.business.domain.Menus;
 import com.bird.business.domain.TbMenus;
 import com.bird.business.service.IAdminManagerService;
@@ -63,6 +64,7 @@ public class MenusController {
      *
      * @return
      */
+    @SysLog(value = "查看菜单列表")
     @RequiresPermissions("menus:list")
     @RequestMapping("/getTreeMenusListData")
     @ResponseBody
@@ -76,6 +78,7 @@ public class MenusController {
      * 删除菜单(级联删除菜单)
      * @param menuId
      */
+    @SysLog(value = "删除菜单")
     @RequiresPermissions("menus:delete")
     @RequestMapping(value = "/deleteMenus",method= RequestMethod.GET)
     @ResponseBody
@@ -93,6 +96,7 @@ public class MenusController {
      * 查找菜单
      * @param menuId
      */
+    @SysLog(value = "查看菜单")
     @RequiresPermissions("menus:update")
     @RequestMapping(value = "/getMenus",method= RequestMethod.GET)
     @ResponseBody
@@ -110,6 +114,7 @@ public class MenusController {
      * 新增/修改菜单
      * @param tbMenus
      */
+    @SysLog(value = "新增/修改菜单")
     @RequiresPermissions(value = {"menus:add", "menus:update"}, logical = Logical.OR)
     @RequestMapping(value = "/addOrModifyMenus",method= RequestMethod.POST)
     @ResponseBody

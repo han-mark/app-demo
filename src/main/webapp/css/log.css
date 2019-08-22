@@ -1,0 +1,19 @@
+.sex_select {
+    height: 38px;
+    line-height: 1.3;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #fff;
+    border-radius: 2px;
+    width: 90px;
+    border-color: #D2D2D2;
+}
+.top_tool {
+    margin-top: 24px;
+    margin-bottom: -5px;
+}
+
+.btn_extend {
+    margin-top: -16px;
+    margin-left: 20px;
+}

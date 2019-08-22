@@ -1,5 +1,6 @@
 package com.bird.business.controller;
 
+import com.bird.business.annotation.SysLog;
 import com.bird.business.domain.TbUser;
 import com.bird.business.domain.TbUserExample;
 import com.bird.business.service.ITbUserService;
@@ -31,6 +32,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @SysLog(value = "查看用户列表")
     @RequiresPermissions("user:list")
     @RequestMapping(value = "/getUserList",method= RequestMethod.POST)
     @ResponseBody
@@ -52,6 +54,7 @@ public class UserController {
      * 删除用户
      * @param id
      */
+    @SysLog(value = "删除用户")
     @RequiresPermissions("user:delete")
     @RequestMapping(value = "/deleteUser",method= RequestMethod.GET)
     @ResponseBody
@@ -69,6 +72,7 @@ public class UserController {
      * 查找用户
      * @param id
      */
+    @SysLog(value = "查看用户")
 //    @RequiresPermissions("user:update") //此处不加权限,更改用户基本信息也需要该接口
     @RequestMapping(value = "/getUser",method= RequestMethod.GET)
     @ResponseBody
@@ -86,6 +90,7 @@ public class UserController {
      * 新增/修改用户
      * @param tbUser
      */
+    @SysLog(value = "新增/修改用户")
     @RequiresPermissions(value = {"user:add", "user:update"}, logical = Logical.OR)
     @RequestMapping(value = "/addOrModifyUser",method= RequestMethod.POST)
     @ResponseBody
@@ -165,6 +170,7 @@ public class UserController {
      * 修改密码
      * @param password
      */
+    @SysLog(value = "修改密码")
     @RequestMapping(value = "/modifyPassword/{password}",method= RequestMethod.GET)
     @ResponseBody
     public ResultUtil modifyPassword(@PathVariable("password") String password){

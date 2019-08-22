@@ -1,5 +1,6 @@
 package com.bird.business.controller;
 
+import com.bird.business.annotation.SysLog;
 import com.bird.business.domain.TbRoles;
 import com.bird.business.domain.TbRolesExample;
 import com.bird.business.service.ITbRolesService;
@@ -26,6 +27,7 @@ public class RolesController {
      * 查询角色列表
      * @return
      */
+    @SysLog(value = "查看角色列表")
 //    @RequiresPermissions("roles:list")  //此处不加权限,用户更改基本信息用
     @RequestMapping(value = "/getRolesList")
     @ResponseBody
@@ -47,6 +49,7 @@ public class RolesController {
      * 删除角色
      * @param roleId
      */
+    @SysLog(value = "删除角色")
     @RequiresPermissions("roles:delete")
     @RequestMapping(value = "/deleteRoles",method= RequestMethod.GET)
     @ResponseBody
@@ -64,6 +67,7 @@ public class RolesController {
      * 查找角色
      * @param roleId
      */
+    @SysLog(value = "查看角色")
     @RequiresPermissions("roles:update")
     @RequestMapping(value = "/getRoles",method= RequestMethod.GET)
     @ResponseBody
@@ -81,6 +85,7 @@ public class RolesController {
      * 新增/修改角色
      * @param tbRoles
      */
+    @SysLog(value = "新增/修改角色")
     @RequiresPermissions(value = {"roles:add", "roles:update"}, logical = Logical.OR)
     @RequestMapping(value = "/addOrModifyRoles",method= RequestMethod.POST)
     @ResponseBody

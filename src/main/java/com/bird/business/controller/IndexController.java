@@ -1,5 +1,6 @@
 package com.bird.business.controller;
 
+import com.bird.business.annotation.SysLog;
 import com.bird.business.domain.TbUser;
 import com.bird.business.domain.TbUserExample;
 import com.bird.business.service.ITbUserService;
@@ -32,7 +33,7 @@ public class IndexController {
     private ITbUserService tbUserService;
 
     /**
-     * 管理员登陆
+     * 用户登陆
      *
      * @param req
      * @param username
@@ -75,6 +76,7 @@ public class IndexController {
      * @param model
      * @return
      */
+    @SysLog(value = "登陆成功")
     @RequestMapping("/index")
     public String toIndex(HttpServletRequest request, Model model){
         //获取当前登录信息,并放入request作用域中
@@ -90,6 +92,7 @@ public class IndexController {
      * 登出
      * @return
      */
+    @SysLog(value = "用户登出")
     @RequestMapping(value="/loginOut")
     public String loginOut(){
         ShiroUtils.logout();
