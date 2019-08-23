@@ -17,7 +17,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -26,12 +25,15 @@ import java.util.Date;
  */
 @Aspect
 @Component
-public  class SystemLogAspect {    
+public  class SystemLogAspect {
+
+    //本地异常日志记录对象
+    private  static  final Logger logger = LoggerFactory.getLogger(SystemLogAspect.class);
+
     //注入Service用于把日志保存数据库    
     @Resource    
     private ITbLogService tbLogService;
-    //本地异常日志记录对象    
-    private  static  final Logger logger = LoggerFactory.getLogger(SystemLogAspect.class);
+
     
     //Controller层切点    
     @Pointcut("@annotation(com.bird.business.annotation.SysLog)")

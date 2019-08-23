@@ -15,9 +15,9 @@ public class QuartzJob {
 
     private  static  final Logger logger = LoggerFactory.getLogger(QuartzJob.class);
 
-    @Scheduled(cron = "0 * * * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     public void clearLogInfo(){
-        logger.info("每分钟清理一次日志信息(已清理)");
+        logger.info("每小时清理一次日志信息(已清理)");
         tbLogService.deleteByExample(null);
     }
 }

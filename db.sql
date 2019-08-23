@@ -50,6 +50,34 @@ INSERT INTO `tb_admin` VALUES (1,'admin','e10adc3949ba59abbe56e057f20f883e',NULL
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tb_log`
+--
+
+DROP TABLE IF EXISTS `tb_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `tb_log` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `operation` varchar(50) NOT NULL COMMENT '操作',
+  `method` varchar(100) DEFAULT NULL COMMENT '执行方法',
+  `params` varchar(500) DEFAULT NULL COMMENT '请求参数',
+  `ip` varchar(64) DEFAULT NULL COMMENT 'ip',
+  `create_time` datetime NOT NULL COMMENT '操作时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=830 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_log`
+--
+
+LOCK TABLES `tb_log` WRITE;
+/*!40000 ALTER TABLE `tb_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_menus`
 --
 
@@ -66,7 +94,7 @@ CREATE TABLE `tb_menus` (
   `parent_id` bigint(20) NOT NULL COMMENT '父节点',
   `sorting` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +103,7 @@ CREATE TABLE `tb_menus` (
 
 LOCK TABLES `tb_menus` WRITE;
 /*!40000 ALTER TABLE `tb_menus` DISABLE KEYS */;
-INSERT INTO `tb_menus` VALUES (1,'首页','','pages/home.jsp','','false',0,9999),(2,'用户管理','','','','false',0,999),(3,'角色管理','','pages/roles.jsp','','false',2,99),(4,'用户列表','&#xe613;','pages/user.jsp','','false',2,98),(5,'菜单管理','&#xe642;','pages/menus.jsp','','false',2,97),(6,'查看','','','roles:list','false',3,NULL),(7,'新增','','','roles:add','false',3,NULL),(8,'修改','','','roles:update','false',3,NULL),(9,'删除','','','roles:delete','false',3,NULL),(10,'查看','','','user:list','false',4,NULL),(11,'新增','','','user:add','false',4,NULL),(12,'修改','','','user:update','false',4,NULL),(13,'删除','','','user:delete','false',4,NULL),(14,'查看','','','menus:list','false',5,NULL),(15,'新增','','','menus:add','false',5,NULL),(16,'修改','','','menus:update','false',5,NULL),(17,'删除','','','menus:delete','false',5,NULL),(87,'查看','','','stu:list','false',86,NULL),(88,'新增','','','stu:add','false',86,NULL),(89,'修改','','','stu:update','false',86,NULL),(90,'删除','','','stu:delete','false',86,NULL),(91,'学生列表','','pages/user_test.jsp','','false',0,11),(92,'查看','','','stu:list','false',91,NULL),(93,'新增','','','stu:add','false',91,NULL),(94,'修改','','','stu:update','false',91,NULL),(95,'删除','','','stu:delete','false',91,NULL);
+INSERT INTO `tb_menus` VALUES (1,'首页','','pages/home.jsp','','false',0,9999),(2,'用户管理','','','','false',0,999),(3,'角色管理','','pages/roles.jsp','','false',2,99),(4,'用户列表','&#xe613;','pages/user.jsp','','false',2,98),(5,'菜单管理','&#xe642;','pages/menus.jsp','','false',2,97),(6,'查看','','','roles:list','false',3,NULL),(7,'新增','','','roles:add','false',3,NULL),(8,'修改','','','roles:update','false',3,NULL),(9,'删除','','','roles:delete','false',3,NULL),(10,'查看','','','user:list','false',4,NULL),(11,'新增','','','user:add','false',4,NULL),(12,'修改','','','user:update','false',4,NULL),(13,'删除','','','user:delete','false',4,NULL),(14,'查看','','','menus:list','false',5,NULL),(15,'新增','','','menus:add','false',5,NULL),(16,'修改','','','menus:update','false',5,NULL),(17,'删除','','','menus:delete','false',5,NULL),(87,'查看','','','stu:list','false',86,NULL),(88,'新增','','','stu:add','false',86,NULL),(89,'修改','','','stu:update','false',86,NULL),(90,'删除','','','stu:delete','false',86,NULL),(91,'学生列表(默认数据源)','','pages/user_test.jsp','','false',0,50),(92,'查看','','','stu:list','false',91,NULL),(93,'新增','','','stu:add','false',91,NULL),(94,'修改','','','stu:update','false',91,NULL),(95,'删除','','','stu:delete','false',91,NULL),(96,'系统日志','','','','false',0,10),(97,'日志管理','','pages/log.jsp','','false',96,9),(98,'查看','','','log:list','false',97,NULL),(99,'学生列表(数据源1)','','pages/user_test1.jsp','','false',0,49),(100,'查看','','','stu:list1','false',99,NULL),(101,'新增','','','stu:add1','false',99,NULL),(102,'修改','','','stu:update1','false',99,NULL),(103,'删除','','','stu:delete1','false',99,NULL);
 /*!40000 ALTER TABLE `tb_menus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,7 +155,7 @@ CREATE TABLE `tb_roles_menus` (
 
 LOCK TABLES `tb_roles_menus` WRITE;
 /*!40000 ALTER TABLE `tb_roles_menus` DISABLE KEYS */;
-INSERT INTO `tb_roles_menus` VALUES (1,1),(2,1),(3,1),(4,1),(5,1),(6,1),(7,1),(8,1),(9,1),(10,1),(11,1),(12,1),(13,1),(14,1),(15,1),(16,1),(17,1),(91,1),(92,1),(93,1),(94,1),(95,1),(91,70),(92,70),(1,72),(91,72),(92,72),(93,72),(94,72),(95,72),(2,73),(3,73),(4,73),(5,73),(6,73),(10,73),(14,73);
+INSERT INTO `tb_roles_menus` VALUES (1,1),(2,1),(3,1),(4,1),(5,1),(6,1),(7,1),(8,1),(9,1),(10,1),(11,1),(12,1),(13,1),(14,1),(15,1),(16,1),(17,1),(91,1),(92,1),(93,1),(94,1),(95,1),(96,1),(97,1),(98,1),(99,1),(100,1),(101,1),(102,1),(103,1),(91,70),(92,70),(1,72),(91,72),(92,72),(93,72),(94,72),(95,72),(2,73),(3,73),(4,73),(5,73),(6,73),(10,73),(14,73);
 /*!40000 ALTER TABLE `tb_roles_menus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,7 +218,7 @@ CREATE TABLE `user_test` (
 
 LOCK TABLES `user_test` WRITE;
 /*!40000 ALTER TABLE `user_test` DISABLE KEYS */;
-INSERT INTO `user_test` VALUES ('06cb966b-3acb-4263-99e8-0def64573b9a','崔辉','2','250','0','2019-08-15 00:52:18'),('1ebc0b09-2fb1-4d8f-b227-f5cf56865fb5','张小小','2','340','0','2019-08-15 02:50:38'),('22343bc5-713f-4b9f-8c7c-e19ab80268ba','张晓晓','2','21','1','2019-07-19 02:18:48'),('3ad07d61-67fd-43e2-afe4-f3d43bbc885e','12','2','12','1','2019-08-15 00:52:56'),('58c33847-919f-4e70-9456-9d58b33c1151','李四','1','22','1','2019-07-19 02:18:49'),('60274fab-a1c0-42d7-b62e-d81f9f29d5ef','1','2','1','0','2019-07-26 09:25:25'),('6dc19408-1a35-4f89-81d9-a1ac8c2e62fa','cuihui','1','28','0','2019-07-19 02:18:48'),('7970bc8a-55db-4c01-bdb4-b416e0925157',NULL,'1',NULL,'0','2019-08-07 08:05:03'),('8fb3c193-e10c-44f3-8a39-78967e3eb92a','张小明','2','24','1','2019-07-19 02:18:48'),('a1ce8855-371c-416e-982d-9fa0a3ec5956','张巧转','2','23','1','2019-07-19 02:18:48'),('b39fe0c2-5c31-4dd8-ae9c-a6f181b2d3ec','111','2','111','1','2019-08-15 02:51:00'),('b9e69e3a-4118-4318-853f-771d44b8c231',NULL,'1',NULL,'0','2019-08-07 07:20:29'),('cc1a4346-6b43-4f8f-aac2-9f8ec114152c','杨娜','2','28','0','2019-07-19 02:18:48'),('d6f0114d-4ced-4e0d-999e-673047c97e88','杨小历','1','33','1','2019-07-19 02:18:49'),('df65c7ff-5e05-45d7-853f-cf496fc279c6','asd','1','44','0','2019-07-19 08:48:38'),('e59df1d4-c31c-4d51-a31f-a89deb01c465','123','2','123','0','2019-07-19 08:52:30'),('ebb14f47-c587-4a3d-b7dc-88d2c9507360','转转','2','23','1','2019-07-19 02:18:49'),('f413935f-8905-499a-912a-c493b58931f2','江鱼儿','2','34','1','2019-07-19 02:18:48');
+INSERT INTO `user_test` VALUES ('06cb966b-3acb-4263-99e8-0def64573b9a','崔辉','2','250','0','2019-08-15 00:52:18'),('1ebc0b09-2fb1-4d8f-b227-f5cf56865fb5','张小小','2','340','0','2019-08-15 02:50:38'),('22343bc5-713f-4b9f-8c7c-e19ab80268ba','张晓晓','2','21','0','2019-08-20 02:04:00'),('3ad07d61-67fd-43e2-afe4-f3d43bbc885e','12','2','12','1','2019-08-15 00:52:56'),('58c33847-919f-4e70-9456-9d58b33c1151','李四','1','22','1','2019-07-19 02:18:49'),('60274fab-a1c0-42d7-b62e-d81f9f29d5ef','1','2','1','0','2019-07-26 09:25:25'),('6dc19408-1a35-4f89-81d9-a1ac8c2e62fa','cuihui','1','28','0','2019-07-19 02:18:48'),('7970bc8a-55db-4c01-bdb4-b416e0925157',NULL,'1',NULL,'0','2019-08-07 08:05:03'),('8fb3c193-e10c-44f3-8a39-78967e3eb92a','张小明','2','24','1','2019-07-19 02:18:48'),('a1ce8855-371c-416e-982d-9fa0a3ec5956','张巧转','2','23','1','2019-07-19 02:18:48'),('b39fe0c2-5c31-4dd8-ae9c-a6f181b2d3ec','111','2','111','1','2019-08-15 02:51:00'),('b9e69e3a-4118-4318-853f-771d44b8c231',NULL,'1',NULL,'0','2019-08-07 07:20:29'),('cc1a4346-6b43-4f8f-aac2-9f8ec114152c','杨娜','2','28','0','2019-07-19 02:18:48'),('d6f0114d-4ced-4e0d-999e-673047c97e88','杨小历','1','33','0','2019-07-19 02:18:49'),('df65c7ff-5e05-45d7-853f-cf496fc279c6','asd','1','44','0','2019-07-19 08:48:38'),('e59df1d4-c31c-4d51-a31f-a89deb01c465','123','2','123','0','2019-07-19 08:52:30'),('ebb14f47-c587-4a3d-b7dc-88d2c9507360','转转','2','23','0','2019-07-19 02:18:49'),('ed514bb7-0396-42c8-aa9c-24571cb6dcbe','默认','2','123','1','2019-08-23 11:53:04'),('f413935f-8905-499a-912a-c493b58931f2','江鱼儿','2','34','0','2019-07-19 02:18:48');
 /*!40000 ALTER TABLE `user_test` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -203,4 +231,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-15 11:10:44
+-- Dump completed on 2019-08-23 20:02:40
