@@ -1,10 +1,12 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
                 pageEncoding="UTF-8"%>
 <%@ include file="/pages/taglib.jsp"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>Test Page</title>
+    <title>后台权限管理系统</title>
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="0">
@@ -17,6 +19,11 @@
 </head>
 
 <body>
+<%
+    Date d = new Date();
+    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    String now = df.format(d);
+%>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
@@ -60,7 +67,7 @@
 
     <div class="layui-footer">
         <!-- 底部固定区域 -->
-        © cuihui.com - 2019-06-20
+        © cuihui.com - <%=now %>
     </div>
 </div>
 <script type="text/javascript" src="${ctx }/js/index.js"></script>

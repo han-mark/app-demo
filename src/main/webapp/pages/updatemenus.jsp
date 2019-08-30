@@ -4,7 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>Test Page</title>
+    <title>后台权限管理系统</title>
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="0">
@@ -37,7 +37,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">图标</label>
         <div class="layui-input-block">
-            <input type="text" id="icon" name="icon" style="width:100%" lay-verify="title" placeholder="该字段暂未使用" autocomplete="off" class="layui-input">
+            <input type="text" id="icon" name="icon" style="width:100%" lay-verify="title" placeholder="请输入图标（仅新增目录和页面时输入）" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">

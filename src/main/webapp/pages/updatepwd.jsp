@@ -4,7 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>Test Page</title>
+    <title>后台权限管理系统</title>
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="0">
@@ -21,7 +21,7 @@
 
 <body>
 <!-- 表单 -->
-<form class="layui-form" id="form" action="">
+<form class="layui-form" id="form" action="" style="margin-top: 15px;">
     <div class="layui-form-item">
         <label class="layui-form-label">旧密码</label>
         <div class="layui-input-block">

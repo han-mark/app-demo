@@ -36,18 +36,18 @@ function generateMenus(menuData){
             } else {
                 menusHtml += '<li class="layui-nav-item">';
             }
-            menusHtml += '<a class="" href="javascript:;">' + val.title + '</a>';
+            menusHtml += '<a class="" href="javascript:;"><i class="layui-icon" style="margin-right: 10px;">' +val.icon+ '</i>' + val.title + '</a>';
             menusHtml += '<dl class="layui-nav-child">';
             val.children.forEach(function( cVal, cIndex ){
-                menusHtml += '<dd><a href="' + ctx + '/' + cVal.href + '" target="mainiframe">' + cVal.title + '</a></dd>';
+                menusHtml += '<dd><a href="' + ctx + '/' + cVal.href + '" target="mainiframe"><i class="layui-icon" style="margin-right: 10px;">' +cVal.icon+ '</i>' + cVal.title + '</a></dd>';
             });
             menusHtml += '</dl>';
             menusHtml += '</li>';
         } else {
             if( index == '0') {
-                menusHtml += '<li class="layui-nav-item layui-nav-itemed"><a href="' + ctx + '/' + val.href + '" target="mainiframe">' + val.title + '</a></li>';
+                menusHtml += '<li class="layui-nav-item layui-nav-itemed"><a href="' + ctx + '/' + val.href + '" target="mainiframe"><i class="layui-icon" style="margin-right: 10px;">' +val.icon+ '</i>' + val.title + '</a></li>';
             } else {
-                menusHtml += '<li class="layui-nav-item"><a href="' + ctx + '/' + val.href + '" target="mainiframe">' + val.title + '</a></li>';
+                menusHtml += '<li class="layui-nav-item"><a href="' + ctx + '/' + val.href + '" target="mainiframe"><i class="layui-icon" style="margin-right: 10px;">' +val.icon+ '</i>' + val.title + '</a></li>';
             }
         }
     });

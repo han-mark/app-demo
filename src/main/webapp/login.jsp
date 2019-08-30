@@ -28,7 +28,7 @@
             <input class="layui-input" name="username" placeholder="用户名" value="admin" lay-verify="required" type="text" autocomplete="off">
         </div>
         <div class="layui-form-item">
-            <input class="layui-input" name="password" placeholder="密码" value="admin"  lay-verify="required" type="password" autocomplete="off">
+            <input class="layui-input" name="password" placeholder="密码" value="123456"  lay-verify="required" type="password" autocomplete="off">
         </div>
         <div class="layui-form-item form_code">
             <input class="layui-input" style="width: 140px;" name="vcode" placeholder="验证码" lay-verify="required" type="text" autocomplete="off" maxlength="4">
@@ -42,6 +42,7 @@
         </div>
         <button class="layui-btn login_btn" lay-submit="" lay-filter="login" id="btn">登录</button>
     </form>
+    <a class="forgetP"  href="#" onclick="forgetUserPwd()">忘记密码</a>
 </div>
 <script type="text/javascript" src="${ctx}/layui/layui.js"></script>
 <script type="text/javascript" src="${ctx}/js/login.js"></script>

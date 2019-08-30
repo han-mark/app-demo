@@ -4,13 +4,13 @@ import com.bird.business.annotation.SysLog;
 import com.bird.business.domain.TbUser;
 import com.bird.business.domain.TbUserExample;
 import com.bird.business.service.ITbUserService;
-import com.bird.business.utils.ResultUtil;
-import com.bird.business.utils.ShiroUtils;
+import com.bird.business.utils.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Md5Hash;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +27,12 @@ import java.util.Map;
 public class UserController {
     @Resource
     private ITbUserService tbUserService;
+
+    @Autowired
+    private JedisUtil jedisUtil;
+
+    @Autowired
+    private MailUtil mailUtil;
 
     /**
      * 查询用户列表
@@ -187,5 +195,109 @@ public class UserController {
             e.printStackTrace();
         }
         return ResultUtil.error("修改失败");
+    }
+
+    /**
+     * 按性别统计用户
+     */
+    @SysLog(value = "用户统计")
+    @RequestMapping(value = "/getUserCount",method= RequestMethod.GET)
+    @ResponseBody
+    public ResultUtil getUserCount(){
+        //使用生成的代码简单统计下
+        List<Map<String,String>> resultList = new ArrayList<>();
+        TbUserExample tbUserExample = new TbUserExample();
+        tbUserExample.or().andSexEqualTo("1");
+        long manCount = tbUserService.countByExample(tbUserExample);
+        Map<String,String> manMap = new HashMap<String,String>();
+        manMap.put("name","男");
+        manMap.put("value", String.valueOf(manCount));
+        resultList.add(manMap);
+
+        TbUserExample tbUserExample1 = new TbUserExample();
+        tbUserExample1.or().andSexEqualTo("2");
+        long womanCount = tbUserService.countByExample(tbUserExample1);
+        Map<String,String> womanMap = new HashMap<String,String>();
+        womanMap.put("name","女");
+        womanMap.put("value", String.valueOf(womanCount));
+        resultList.add(womanMap);
+        return ResultUtil.ok(resultList);
+    }
+
+    /**
+     * 获取忘记密码时的验证码
+     * @param email
+     * @return
+     */
+    @SysLog(value = "获取找回密码所需的验证码")
+    @RequestMapping(value = "/getForgotPwdCode", method= RequestMethod.GET)
+    @ResponseBody
+    public ResultUtil getForgotPwdCode(String email){
+        TbUserExample tbUserExample = new TbUserExample();
+        tbUserExample.or().andEMailEqualTo(email);
+        long count = tbUserService.countByExample(tbUserExample);
+        if(count == 0){
+            //找不到该邮箱的账号
+            return ResultUtil.error("不存在的账号!");
+        }else{
+            try {
+                //生成长度为4的随机数字
+                String code = RandomStringUtil.getRandomCode(4, 0);
+                //存到redis缓存中，有效时间为5分钟
+                //先删除原来已存在的验证码
+                jedisUtil.delete(email.getBytes());
+                jedisUtil.set(email.getBytes(), code.getBytes());
+                jedisUtil.expire(email.getBytes(),300);
+                //发送邮件
+                mailUtil.send(email, "找回密码", "验证码：" + code + "(验证码有效期为5分钟)");
+                return ResultUtil.ok("获取验证码成功！");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ResultUtil.ok("获取验证码失败！");
+            }
+        }
+    }
+
+    /**
+     * 重设密码
+     * @param email
+     * @param code
+     * @param password
+     * @return
+     */
+    @SysLog(value = "重设密码")
+    @RequestMapping("/resetPwd")
+    @ResponseBody
+    public ResultUtil resetPwd(String email, String code, String password){
+        try {
+            //先根据邮箱获取相应用户的信息
+            TbUserExample tbUserExample = new TbUserExample();
+            tbUserExample.or().andEMailEqualTo(email);
+            List<TbUser> tbUsers = tbUserService.selectByExample(tbUserExample);
+            if(CollectionUtils.isEmpty(tbUsers)){
+                //找不到该邮箱的账号
+                return ResultUtil.error("不存在的账号!");
+            }else{
+                TbUser user = tbUsers.get(0);
+                //从redis缓存中获取验证码
+                if(jedisUtil.exists(email.getBytes())){
+                    String redisCode = new String(jedisUtil.get(email.getBytes()));
+                    if(redisCode.equals(code)){
+                        //验证码正确，修改密码
+                        String npwd = new Md5Hash(password, user.getUsername()).toString();
+                        user.setPassword(npwd);
+                        tbUserService.updateByPrimaryKey(user);
+                        return ResultUtil.ok("修改成功!");
+                    }else{
+                        return ResultUtil.error("验证码错误！");
+                    }
+                }else{
+                    return ResultUtil.error("验证码已过期，请重新获取！");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultUtil.error("服务器出了小差，请稍等...");
+        }
     }
 }

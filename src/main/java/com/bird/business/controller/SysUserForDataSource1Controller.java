@@ -36,7 +36,7 @@ public class SysUserForDataSource1Controller {
      * @param request
      * @return
      */
-    @SysLog(value = "查看学生列表")
+//    @SysLog(value = "查看学生列表")  //dataSource1中无日志表,此处不做记录
     @DataSource(dataSource = "dataSource1")
     @RequiresPermissions("stu:list1")
     @RequestMapping(value = "/findAll1",method= RequestMethod.POST)
@@ -65,7 +65,7 @@ public class SysUserForDataSource1Controller {
      * 删除学生
      * @param paramMap
      */
-    @SysLog(value = "删除学生")
+//    @SysLog(value = "删除学生")  //dataSource1中无日志表,此处不做记录
     @DataSource(dataSource = "dataSource1")
     @RequiresPermissions("stu:delete1")
     @RequestMapping(value = "/deleteUserByUuid1",method= RequestMethod.POST)
@@ -85,7 +85,7 @@ public class SysUserForDataSource1Controller {
      * 查找用户
      * @param paramMap
      */
-    @SysLog(value = "查看学生")
+//    @SysLog(value = "查看学生")  //dataSource1中无日志表,此处不做记录
     @DataSource(dataSource = "dataSource1")
     @RequiresPermissions("stu:update1")
     @RequestMapping(value = "/getUserByUuid1",method= RequestMethod.POST)
@@ -99,7 +99,7 @@ public class SysUserForDataSource1Controller {
      * 新增/修改用户
      * @param paramMap
      */
-    @SysLog(value = "新增/修改学生")
+//    @SysLog(value = "新增/修改学生")  //dataSource1中无日志表,此处不做记录
     @DataSource(dataSource = "dataSource1")
     @RequiresPermissions(value = {"stu:add1", "stu:update1"}, logical = Logical.OR)
     @RequestMapping(value = "/addOrUpdateUser1",method= RequestMethod.POST)

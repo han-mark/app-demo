@@ -33,6 +33,12 @@
                 /login.jsp = anon
                 /login = anon
                 /loginOut = anon
+                <!--忘记密码页不需要认证-->
+                /pages/forgetpwd.jsp = anon
+                <!--重设密码获取邮箱验证码不需要认证-->
+                /getForgotPwdCode = anon
+                <!--重设密码不需要认证-->
+                /resetPwd = anon
                 <!--获取验证码不需要认证-->
                 /vcode = anon
                 <!--authc是认证过，user是登录过，如果开启了Readmemberme功能的话，后者也是可以通过的，而前者通过不了-->

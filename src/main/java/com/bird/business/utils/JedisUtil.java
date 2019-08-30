@@ -35,6 +35,15 @@ public class JedisUtil {
         }
     }
 
+    public boolean exists(byte[] key) {
+        Jedis jedis = getRsouece();
+        try {
+            return jedis.exists(key);
+        } finally {
+            jedis.close();
+        }
+    }
+
     public byte[] get(byte[] key) {
         Jedis jedis = getRsouece();
         try {

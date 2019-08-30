@@ -27,3 +27,18 @@ function refreshCode(){
     //加随机参数,解决点击验证码不刷新情况
     captcha.src = ctx+"/vcode?t=" + new Date().getTime();
 }
+
+//修改用户密码
+function forgetUserPwd(){
+    layer.open({
+        type:2, //2表示frame
+        title:'密码找回',
+        area:['40%','60%'],
+        shadeClose:false,
+        closeBtn:1,
+        content:ctx + '/pages/forgetpwd.jsp',
+        end:function(){
+            // table.reload('table-user'); //对应table.render中定义的id
+        }
+    });
+}

@@ -49,6 +49,13 @@ layui.use(['treeTable','layer','code','form'],function(){
                 title: '图标',
                 width: '100px',
                 align: 'center',
+                template: function(item){
+                    if(item.icon){
+                        return '<i class="layui-icon">' +item.icon+ '</i>';
+                    }else{
+                        return '';
+                    }
+                }
             },
             {
                 key: 'href',

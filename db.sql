@@ -16,40 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tb_admin`
---
-
-DROP TABLE IF EXISTS `tb_admin`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `tb_admin` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '管理员id',
-  `username` varchar(50) NOT NULL COMMENT '用户名',
-  `password` varchar(50) NOT NULL COMMENT '密码',
-  `salt` varchar(5) DEFAULT '',
-  `fullname` varchar(50) NOT NULL COMMENT '全名',
-  `e_mail` varchar(100) DEFAULT NULL,
-  `sex` varchar(1) DEFAULT NULL COMMENT '性别：0女，1男,2保密',
-  `birthday` date DEFAULT NULL,
-  `address` varchar(100) DEFAULT NULL COMMENT '地址',
-  `phone` varchar(20) DEFAULT NULL COMMENT '手机号',
-  `role_id` bigint(20) DEFAULT NULL COMMENT '角色编号',
-  PRIMARY KEY (`id`),
-  KEY `role_id` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tb_admin`
---
-
-LOCK TABLES `tb_admin` WRITE;
-/*!40000 ALTER TABLE `tb_admin` DISABLE KEYS */;
-INSERT INTO `tb_admin` VALUES (1,'admin','e10adc3949ba59abbe56e057f20f883e',NULL,'arthur','duxiaod@qq.com','1','1994-11-08','陕西省西安市雁塔区','17693109997',1),(18,'test','e10adc3949ba59abbe56e057f20f883e',NULL,'test','test@test.com','1','2018-02-25','甘肃省兰州市榆中县和平镇','17601038192',61),(23,'cuihui','asdafa',NULL,'崔辉',NULL,NULL,NULL,NULL,NULL,1),(24,'cuihui','123',NULL,'123',NULL,NULL,NULL,NULL,NULL,1),(25,'cuihui','asdafa',NULL,'asdasd',NULL,NULL,NULL,NULL,NULL,1),(26,'cuihui','asdafa',NULL,'asdasd',NULL,NULL,NULL,NULL,NULL,1),(27,'cuihui','asdafa',NULL,'asdasd',NULL,NULL,NULL,NULL,NULL,1),(28,'cuihui','asdafa',NULL,'asdasd',NULL,NULL,NULL,NULL,NULL,1),(29,'cuihui','asdafa',NULL,'asdasd',NULL,NULL,NULL,NULL,NULL,1),(30,'cuihui','asdafa',NULL,'asdasd',NULL,NULL,NULL,NULL,NULL,1),(31,'cuihui','asdafa',NULL,'asdasd',NULL,NULL,NULL,NULL,NULL,1),(32,'cuihui','asdafa',NULL,'asdasd',NULL,NULL,NULL,NULL,NULL,1),(33,'cuihui','asdafa',NULL,'asdasd',NULL,NULL,NULL,NULL,NULL,1);
-/*!40000 ALTER TABLE `tb_admin` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `tb_log`
 --
 
@@ -65,7 +31,7 @@ CREATE TABLE `tb_log` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'ip',
   `create_time` datetime NOT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=830 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1163 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,6 +40,7 @@ CREATE TABLE `tb_log` (
 
 LOCK TABLES `tb_log` WRITE;
 /*!40000 ALTER TABLE `tb_log` DISABLE KEYS */;
+INSERT INTO `tb_log` VALUES (1105,'admin','登陆成功','/app_demo_war_exploded/index','{};','0:0:0:0:0:0:0:1','2019-08-30 21:02:07'),(1106,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:02:08'),(1107,'admin','用户登出','/app_demo_war_exploded/loginOut','','0:0:0:0:0:0:0:1','2019-08-30 21:03:32'),(1108,'admin','登陆成功','/app_demo_war_exploded/index','{};','0:0:0:0:0:0:0:1','2019-08-30 21:08:26'),(1109,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:08:26'),(1110,'admin','查看角色列表','/app_demo_war_exploded/getRolesList','','0:0:0:0:0:0:0:1','2019-08-30 21:09:03'),(1111,'admin','查看用户','/app_demo_war_exploded/getUser','1;','0:0:0:0:0:0:0:1','2019-08-30 21:09:03'),(1112,'admin','查看日志列表','/app_demo_war_exploded/getLogList','{\"page\":\"1\",\"limit\":\"10\"};','0:0:0:0:0:0:0:1','2019-08-30 21:09:21'),(1113,'admin','查看角色列表','/app_demo_war_exploded/getRolesList','','0:0:0:0:0:0:0:1','2019-08-30 21:09:26'),(1114,'admin','查看角色','/app_demo_war_exploded/getRoles','1;','0:0:0:0:0:0:0:1','2019-08-30 21:09:29'),(1115,'admin','查看用户列表','/app_demo_war_exploded/getUserList','{\"page\":\"1\",\"limit\":\"10\"};','0:0:0:0:0:0:0:1','2019-08-30 21:09:33'),(1116,'admin','查看菜单列表','/app_demo_war_exploded/getTreeMenusListData','-1;','0:0:0:0:0:0:0:1','2019-08-30 21:09:36'),(1117,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:10:01'),(1118,'admin','登陆成功','/app_demo_war_exploded/index','{};','0:0:0:0:0:0:0:1','2019-08-30 21:13:18'),(1119,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:13:18'),(1120,'admin','查看学生列表','/app_demo_war_exploded/findAll','{\"page\":\"1\",\"limit\":\"10\"};','0:0:0:0:0:0:0:1','2019-08-30 21:13:44'),(1121,'admin','查看学生列表','/app_demo_war_exploded/findAll','{\"page\":\"1\",\"limit\":\"10\"};','0:0:0:0:0:0:0:1','2019-08-30 21:13:48'),(1122,'admin','查看日志列表','/app_demo_war_exploded/getLogList','{\"page\":\"1\",\"limit\":\"10\"};','0:0:0:0:0:0:0:1','2019-08-30 21:13:55'),(1123,'admin','查看日志列表','/app_demo_war_exploded/getLogList','{\"page\":\"2\",\"limit\":\"10\"};','0:0:0:0:0:0:0:1','2019-08-30 21:14:00'),(1124,'admin','查看日志列表','/app_demo_war_exploded/getLogList','{\"page\":\"1\",\"limit\":\"10\"};','0:0:0:0:0:0:0:1','2019-08-30 21:14:02'),(1125,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:14:09'),(1126,'admin','查看角色列表','/app_demo_war_exploded/getRolesList','','0:0:0:0:0:0:0:1','2019-08-30 21:14:24'),(1127,'admin','查看用户','/app_demo_war_exploded/getUser','1;','0:0:0:0:0:0:0:1','2019-08-30 21:14:24'),(1128,'admin','登陆成功','/app_demo_war_exploded/index','{};','0:0:0:0:0:0:0:1','2019-08-30 21:14:45'),(1129,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:14:45'),(1130,'admin','登陆成功','/app_demo_war_exploded/index','{};','0:0:0:0:0:0:0:1','2019-08-30 21:14:47'),(1131,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:14:48'),(1132,'admin','登陆成功','/app_demo_war_exploded/index','{};','0:0:0:0:0:0:0:1','2019-08-30 21:14:50'),(1133,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:14:50'),(1134,'admin','登陆成功','/app_demo_war_exploded/index','{};','0:0:0:0:0:0:0:1','2019-08-30 21:14:50'),(1135,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:14:51'),(1136,'admin','登陆成功','/app_demo_war_exploded/index','{};','0:0:0:0:0:0:0:1','2019-08-30 21:14:51'),(1137,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:14:52'),(1138,'admin','登陆成功','/app_demo_war_exploded/index','{};','0:0:0:0:0:0:0:1','2019-08-30 21:14:52'),(1139,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:14:52'),(1140,'admin','登陆成功','/app_demo_war_exploded/index','{};','0:0:0:0:0:0:0:1','2019-08-30 21:18:33'),(1141,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:18:33'),(1142,'admin','登陆成功','/app_demo_war_exploded/index','{};','0:0:0:0:0:0:0:1','2019-08-30 21:18:40'),(1143,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:18:40'),(1144,'admin','登陆成功','/app_demo_war_exploded/index','{};','0:0:0:0:0:0:0:1','2019-08-30 21:18:41'),(1145,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:18:41'),(1146,'admin','登陆成功','/app_demo_war_exploded/index','{};','0:0:0:0:0:0:0:1','2019-08-30 21:18:43'),(1147,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:18:43'),(1148,'admin','登陆成功','/app_demo_war_exploded/index','{};','0:0:0:0:0:0:0:1','2019-08-30 21:19:06'),(1149,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:19:06'),(1150,'admin','登陆成功','/app_demo_war_exploded/index','{};','0:0:0:0:0:0:0:1','2019-08-30 21:19:08'),(1151,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:19:08'),(1152,'admin','登陆成功','/app_demo_war_exploded/index','{};','0:0:0:0:0:0:0:1','2019-08-30 21:19:09'),(1153,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:19:09'),(1154,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:19:41'),(1155,'admin','查看菜单列表','/app_demo_war_exploded/getTreeMenusListData','-1;','0:0:0:0:0:0:0:1','2019-08-30 21:19:49'),(1156,'admin','查看角色列表','/app_demo_war_exploded/getRolesList','','0:0:0:0:0:0:0:1','2019-08-30 21:20:04'),(1157,'admin','查看用户','/app_demo_war_exploded/getUser','1;','0:0:0:0:0:0:0:1','2019-08-30 21:20:04'),(1158,'admin','查看学生列表','/app_demo_war_exploded/findAll','{\"page\":\"1\",\"limit\":\"10\"};','0:0:0:0:0:0:0:1','2019-08-30 21:20:44'),(1159,'admin','查看角色列表','/app_demo_war_exploded/getRolesList','','0:0:0:0:0:0:0:1','2019-08-30 21:20:57'),(1160,'admin','查看用户列表','/app_demo_war_exploded/getUserList','{\"page\":\"1\",\"limit\":\"10\"};','0:0:0:0:0:0:0:1','2019-08-30 21:20:58'),(1161,'admin','查看菜单列表','/app_demo_war_exploded/getTreeMenusListData','-1;','0:0:0:0:0:0:0:1','2019-08-30 21:20:59'),(1162,'admin','用户统计','/app_demo_war_exploded/getUserCount','','0:0:0:0:0:0:0:1','2019-08-30 21:21:11');
 /*!40000 ALTER TABLE `tb_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,7 +70,7 @@ CREATE TABLE `tb_menus` (
 
 LOCK TABLES `tb_menus` WRITE;
 /*!40000 ALTER TABLE `tb_menus` DISABLE KEYS */;
-INSERT INTO `tb_menus` VALUES (1,'首页','','pages/home.jsp','','false',0,9999),(2,'用户管理','','','','false',0,999),(3,'角色管理','','pages/roles.jsp','','false',2,99),(4,'用户列表','&#xe613;','pages/user.jsp','','false',2,98),(5,'菜单管理','&#xe642;','pages/menus.jsp','','false',2,97),(6,'查看','','','roles:list','false',3,NULL),(7,'新增','','','roles:add','false',3,NULL),(8,'修改','','','roles:update','false',3,NULL),(9,'删除','','','roles:delete','false',3,NULL),(10,'查看','','','user:list','false',4,NULL),(11,'新增','','','user:add','false',4,NULL),(12,'修改','','','user:update','false',4,NULL),(13,'删除','','','user:delete','false',4,NULL),(14,'查看','','','menus:list','false',5,NULL),(15,'新增','','','menus:add','false',5,NULL),(16,'修改','','','menus:update','false',5,NULL),(17,'删除','','','menus:delete','false',5,NULL),(87,'查看','','','stu:list','false',86,NULL),(88,'新增','','','stu:add','false',86,NULL),(89,'修改','','','stu:update','false',86,NULL),(90,'删除','','','stu:delete','false',86,NULL),(91,'学生列表(默认数据源)','','pages/user_test.jsp','','false',0,50),(92,'查看','','','stu:list','false',91,NULL),(93,'新增','','','stu:add','false',91,NULL),(94,'修改','','','stu:update','false',91,NULL),(95,'删除','','','stu:delete','false',91,NULL),(96,'系统日志','','','','false',0,10),(97,'日志管理','','pages/log.jsp','','false',96,9),(98,'查看','','','log:list','false',97,NULL),(99,'学生列表(数据源1)','','pages/user_test1.jsp','','false',0,49),(100,'查看','','','stu:list1','false',99,NULL),(101,'新增','','','stu:add1','false',99,NULL),(102,'修改','','','stu:update1','false',99,NULL),(103,'删除','','','stu:delete1','false',99,NULL);
+INSERT INTO `tb_menus` VALUES (1,'首页','&#xe68e;','pages/home.jsp','','false',0,9999),(2,'用户管理','&#xe632;','','','false',0,999),(3,'角色管理','&#xe664;','pages/roles.jsp','','false',2,99),(4,'用户列表','&#xe612;','pages/user.jsp','','false',2,98),(5,'菜单管理','&#xe649;','pages/menus.jsp','','false',2,97),(6,'查看','','','roles:list','false',3,NULL),(7,'新增','','','roles:add','false',3,NULL),(8,'修改','','','roles:update','false',3,NULL),(9,'删除','','','roles:delete','false',3,NULL),(10,'查看','','','user:list','false',4,NULL),(11,'新增','','','user:add','false',4,NULL),(12,'修改','','','user:update','false',4,NULL),(13,'删除','','','user:delete','false',4,NULL),(14,'查看','','','menus:list','false',5,NULL),(15,'新增','','','menus:add','false',5,NULL),(16,'修改','','','menus:update','false',5,NULL),(17,'删除','','','menus:delete','false',5,NULL),(87,'查看','','','stu:list','false',86,NULL),(88,'新增','','','stu:add','false',86,NULL),(89,'修改','','','stu:update','false',86,NULL),(90,'删除','','','stu:delete','false',86,NULL),(91,'学生列表(默认数据源)','&#xe770;','pages/user_test.jsp','','false',0,50),(92,'查看','','','stu:list','false',91,NULL),(93,'新增','','','stu:add','false',91,NULL),(94,'修改','','','stu:update','false',91,NULL),(95,'删除','','','stu:delete','false',91,NULL),(96,'系统日志','&#xe705;','','','false',0,10),(97,'日志管理','&#xe655;','pages/log.jsp','','false',96,9),(98,'查看','','','log:list','false',97,NULL),(99,'学生列表(数据源1)','&#xe770;','pages/user_test1.jsp','','false',0,49),(100,'查看','','','stu:list1','false',99,NULL),(101,'新增','','','stu:add1','false',99,NULL),(102,'修改','','','stu:update1','false',99,NULL),(103,'删除','','','stu:delete1','false',99,NULL);
 /*!40000 ALTER TABLE `tb_menus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,7 +157,7 @@ CREATE TABLE `tb_user` (
 
 LOCK TABLES `tb_user` WRITE;
 /*!40000 ALTER TABLE `tb_user` DISABLE KEYS */;
-INSERT INTO `tb_user` VALUES (1,'admin','f6fdffe48c908deb0f4c3bd36c032e72','admin','管理员','751670441@qq.com','1','2013-03-12','西安','15502986569',1),(27,'cuihui','e13dad0b6548a68a277ecd58d302e282','cuihui','崔辉','123@qq.com','1','2019-08-01','as','11111111111',73),(28,'yangna','fddb458b8df4a49b682a41b821e9fb5b','yangna','杨娜','111@qq.com','2','2019-08-05','123','12322222222',70);
+INSERT INTO `tb_user` VALUES (1,'admin','a66abb5684c45962d887564f08346e8d','admin','管理员','751670441@qq.com','1','2013-03-12','西安','15502986569',1),(27,'cuihui','e13dad0b6548a68a277ecd58d302e282','cuihui','崔辉','123@qq.com','1','2019-08-01','as','11111111111',73),(28,'yangna','fddb458b8df4a49b682a41b821e9fb5b','yangna','杨娜','111@qq.com','2','2019-08-05','123','12322222222',70);
 /*!40000 ALTER TABLE `tb_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -231,4 +198,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-23 20:02:40
+-- Dump completed on 2019-08-30 21:35:03
