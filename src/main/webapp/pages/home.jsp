@@ -66,6 +66,15 @@
     <li class="layui-timeline-item">
         <i class="layui-icon layui-timeline-axis"></i>
         <div class="layui-timeline-content layui-text">
+            <h4 class="layui-timeline-title">Aug 30, 2019</h4>
+            <p>
+                增加email找回密码功能
+            </p>
+        </div>
+    </li>
+    <li class="layui-timeline-item">
+        <i class="layui-icon layui-timeline-axis"></i>
+        <div class="layui-timeline-content layui-text">
             <h4 class="layui-timeline-title">Aug 23, 2019</h4>
             <p>
                 增加多数据源(aop)
