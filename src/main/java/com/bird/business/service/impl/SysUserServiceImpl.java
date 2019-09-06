@@ -1,14 +1,10 @@
 package com.bird.business.service.impl;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.bird.business.dao.SysUserDao;
 import com.bird.business.domain.SysUser;
 import com.bird.business.service.ISysUserService;
-
 import java.util.List;
 import java.util.Map;
 

@@ -6,7 +6,10 @@
 <head>
     <meta charset="utf-8">
     <title>用户登录</title>
-    <link rel="stylesheet" href="${ctx}/layui/css/layui.css" media="all" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="${ctx}/images/favicon.ico" />
+
+    <link rel="stylesheet" href="${ctx}/common/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="${ctx}/css/login.css" media="all" />
     <script>  
         var ctx = "${ctx}";
@@ -44,7 +47,7 @@
     </form>
     <a class="forgetP"  href="#" onclick="forgetUserPwd()">忘记密码</a>
 </div>
-<script type="text/javascript" src="${ctx}/layui/layui.js"></script>
+<script type="text/javascript" src="${ctx}/common/layui/layui.js"></script>
 <script type="text/javascript" src="${ctx}/js/login.js"></script>
 </body>
 </html>

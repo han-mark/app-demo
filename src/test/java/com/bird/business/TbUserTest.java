@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration( locations = {"classpath:spring-mvc.xml","classpath:mybatis-config.xml","classpath:spring-mybatis.xml","classpath:spring-shiro.xml"})
+@ContextConfiguration( locations = {"classpath:spring/spring-mvc.xml", "classpath:spring/mybatis-config.xml", "classpath:spring/spring-mybatis.xml", "classpath:spring/spring-shiro.xml"})
 public class TbUserTest {
 
     @Autowired

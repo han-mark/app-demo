@@ -15,7 +15,7 @@
                         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd  
                         ">  
     <!-- 引入属性文件 -->
-    <context:property-placeholder ignore-unresolvable="true" location="classpath:mail.properties" />
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:config/mail.properties" />
   
     <!-- 邮件发送器   -->  
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">  

@@ -27,8 +27,7 @@
                 /css/**=anon
                 /images/**=anon
                 /js/**=anon
-                /layui/**=anon
-                /layui-tree/**=anon
+                /common/**=anon
                 <!--登录页不需要任何认证-->
                 /login.jsp = anon
                 /login = anon

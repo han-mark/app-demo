@@ -1,20 +1,15 @@
 package com.bird.business;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import java.util.List;
 
 /**
  * mybatis-generator相关方法的测试类
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration( locations = {"classpath:spring-mvc.xml","classpath:mybatis-config.xml","classpath:spring-mybatis.xml"})
+@ContextConfiguration( locations = {"classpath:spring/spring-mvc.xml", "classpath:spring/mybatis-config.xml", "classpath:spring/spring-mybatis.xml"})
 public class TbAdminTest {
 /*
     @Autowired

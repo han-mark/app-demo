@@ -9,11 +9,11 @@
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="0">
 
-    <link rel="stylesheet" href="${ctx }/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="${ctx }/common/layui/css/layui.css" media="all">
 
-    <script type="text/javascript" src="${ctx }/layui/layui.js"></script>
-    <script type="text/javascript" src="${ctx }/echarts/echarts.js"></script>
-    <script type="text/javascript" src="${ctx }/jquery/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="${ctx }/common/layui/layui.js"></script>
+    <script type="text/javascript" src="${ctx }/common/echarts/echarts.js"></script>
+    <script type="text/javascript" src="${ctx }/common/jquery/jquery-3.4.1.js"></script>
     <script>
         var ctx = "${ctx}";
     </script>

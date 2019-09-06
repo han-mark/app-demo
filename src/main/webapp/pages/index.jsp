@@ -11,8 +11,10 @@
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="0">
 
-    <link rel="stylesheet" href="${ctx}/layui/css/layui.css" media="all">
-    <script type="text/javascript" src="${ctx}/layui/layui.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="${ctx}/images/favicon.ico" />
+
+    <link rel="stylesheet" href="${ctx}/common/layui/css/layui.css" media="all">
+    <script type="text/javascript" src="${ctx}/common/layui/layui.js"></script>
     <script>
         var ctx = "${ctx}";
     </script>
