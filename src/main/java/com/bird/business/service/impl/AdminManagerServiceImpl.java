@@ -67,7 +67,9 @@ public class AdminManagerServiceImpl implements IAdminManagerService {
         if (!(roleId == -1)){
             TbRolesMenusExample tbRolesMenusExample = new TbRolesMenusExample();
             tbRolesMenusExample.or().andRoleIdEqualTo(roleId);
-            List<TbRolesMenusKey> tbRolesMenusKeys = tbRolesMenusMapper.selectByExample(tbRolesMenusExample);
+//            List<TbRolesMenusKey> tbRolesMenusKeys = tbRolesMenusMapper.selectByExample(tbRolesMenusExample);
+            //仅获取最底层节点是否选中
+            List<TbRolesMenusKey> tbRolesMenusKeys = adminManagerDao.getBottumCheckedMenus(roleId + "");
             //没有单独写mapper,使用生成的代码方法
             if (!CollectionUtils.isEmpty(tbRolesMenusKeys)) {
                 for(TbMenus tbMenus : tbMenusList){

@@ -1,6 +1,7 @@
 package com.bird.business.dao;
 
 import com.bird.business.domain.Menus;
+import com.bird.business.domain.TbRolesMenusKey;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -27,4 +28,6 @@ public interface AdminManagerDao {
      * @return
      */
     public List<Menus> getMenusList(@Param("userName") String userName);
+
+    public List<TbRolesMenusKey> getBottumCheckedMenus(@Param("roleId") String roleId);
 }

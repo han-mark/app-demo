@@ -48,4 +48,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE u.`username` = #{userName} AND (m.`perms` IS NULL OR TRIM(m.`perms`) = '')
         ORDER BY sorting DESC
     </select>
+
+    <select id="getBottumCheckedMenus" parameterType="java.lang.String" resultType="com.bird.business.domain.TbRolesMenusKey">
+        SELECT
+          menu_id menuId,role_id roleId
+        FROM
+          `tb_roles_menus`
+        WHERE role_id = #{roleId}
+          AND menu_id NOT IN
+          (SELECT DISTINCT
+            parent_id
+          FROM
+            tb_menus)
+    </select>
 </mapper>

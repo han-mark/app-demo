@@ -37,7 +37,6 @@
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">分配权限</label>
-        <label style="margin-top: 8px;display: inline-block;color: red;">(此处有BUG,后台返回数据无问题,layui树形组件默认选中有问题)</label>
     </div>
     <div id="treeData"></div>
     <div class="layui-form-item">

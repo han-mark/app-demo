@@ -26,7 +26,7 @@
     </shiro:hasPermission>
     <button type="button" class="layui-btn layui-btn-primary layui-btn-sm open-all">全部展开</button>
     <button type="button" class="layui-btn layui-btn-primary layui-btn-sm close-all">全部关闭</button>
-    <label style="margin-top: 8px;display: inline-block;color: red;">（左侧导航栏目录仅支持到二级,添加菜单时务必注意）</label>
+    <label style="margin-top: 8px;display: inline-block;color: red;">（左侧导航栏目录仅支持到二级,添加菜单时请注意）</label>
     <table class="layui-table layui-form" id="tree-table" lay-size="sm"></table>
 </div>
 <script type="text/javascript" src="${ctx }/js/menus.js"></script>
